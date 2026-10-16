@@ -1,6 +1,8 @@
-# PPTimiz Next
+# SlideSlim
 
-Application Windows indépendante pour réduire la taille des présentations PowerPoint `.pptx` et `.pptm`, en créant une nouvelle copie. Version actuelle : **2.1**.
+**Des présentations plus légères, des images à la bonne taille.**
+
+Application Windows indépendante pour réduire la taille des présentations PowerPoint `.pptx` et `.pptm`, en créant une nouvelle copie. Version actuelle : **2.1**. Le nom interne reste provisoirement PPTimiz Next.
 
 Le traitement est entièrement local. PowerPoint n’a pas besoin d’être installé ou ouvert et aucun complément Office n’est chargé.
 
@@ -82,3 +84,4 @@ Les **35 tests automatisés** couvrent notamment la préservation de l’origina
 Une intégration COM au ruban a été expérimentée puis abandonnée à cause de chargements intermittents sur le poste de test. La version distribuée est l’application indépendante. Aucun enregistrement COM n’est nécessaire pour l’utiliser.
 
 Le projet s’appuie sur les formats Open XML ; aucun binaire ni code décompilé du programme original n’est distribué dans ce dépôt.
+
