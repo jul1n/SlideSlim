@@ -7,13 +7,26 @@
 Compressez vos présentations PowerPoint pour les partager et les projeter plus facilement.<br>
 **Des images dimensionnées pour vos diapositives. Un original toujours conservé.**
 
-**Windows · PowerPoint .pptx / .pptm · Traitement 100 % local · Version 2.1**
+**Windows · PowerPoint .pptx / .pptm · Traitement 100 % local · Version 2.2**
 
 [Démarrer](#démarrer-en-quelques-minutes) · [Voir les résultats](#un-exemple-concret) · [Choisir sa qualité](#trois-profils-pour-trouver-le-bon-équilibre) · [Comprendre le moteur](#des-pixels-utiles-là-où-il-en-faut)
 
 </div>
 
 ---
+
+## Une interface qui va à l’essentiel
+
+Une zone de dépôt, trois profils et un bouton pour créer votre copie. Survolez les commandes et les profils pour afficher leurs explications.
+
+![Accueil de SlideSlim : dépôt de fichier et trois profils de compression](docs/screenshots/accueil.png)
+
+<details>
+<summary>Voir les paramètres avec un fichier de démonstration</summary>
+
+![SlideSlim prêt à compresser un fichier synthétique en Full HD](docs/screenshots/parametres.png)
+
+</details>
 
 ## Une présentation prête à circuler
 
@@ -79,13 +92,13 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\Install-Standalone.ps1
 
 **Prérequis : Windows avec .NET Framework 4.8 recommandé.** La compilation utilise le compilateur .NET Framework présent sur le poste, sans paquet NuGet ni téléchargement de dépendances. Microsoft PowerPoint n’est pas requis pour le traitement.
 
-L’installateur crée un raccourci sur le Bureau et dans le menu Démarrer. Le nom affiché dans l’application et les raccourcis est encore **PPTimiz Next** ; SlideSlim est le nouveau nom du projet.
+L’installateur crée un raccourci sur le Bureau et dans le menu Démarrer. L’application et ses raccourcis portent le nom **SlideSlim**.
 
 ### Depuis une archive de distribution
 
 Si vous disposez d’une archive compilée, extrayez tous ses fichiers puis lancez `Installer.cmd`.
 
-L’installation se fait pour l’utilisateur courant dans `%USERPROFILE%\Applications\PPTimizNext\Standalone-2.1`, normalement sans droit administrateur. Elle désactive uniquement les anciens compléments `PPTimizNext.*` de ce projet.
+L’installation se fait pour l’utilisateur courant dans `%USERPROFILE%\Applications\PPTimizNext\Standalone-2.2`, normalement sans droit administrateur. Elle désactive uniquement les anciens compléments `PPTimizNext.*` de ce projet.
 
 ### Votre première compression
 

@@ -2,13 +2,12 @@ using System;
 using System.Windows.Forms;
 using PPTimizNext;
 class Smoke {
+ static int radios,selected; static string choice;
+ static void Visit(Control parent) { foreach(Control c in parent.Controls) { var r=c as RadioButton; if(r!=null) { radios++; if(r.Checked) { selected++; choice=r.Text; } } Visit(c); } }
  [STAThread] static int Main() {
-  using(var f=new Launcher(null)) {
-   f.Show(); Application.DoEvents();
-   if(!f.Visible || !f.AllowDrop || f.Controls.Count<8) return 1;
-   bool profiles=false; foreach(Control c in f.Controls) { var box=c as ComboBox; if(box!=null) profiles=box.Items.Count==3 && box.SelectedIndex==1; }
-   if(!profiles) return 2;
-   f.Close(); Console.WriteLine("PASS: independent window opens, file drop enabled, three profiles available, Full HD default.");
+  using(var f=new Launcher(null)) { f.Show(); Application.DoEvents(); Visit(f);
+   if(!f.Visible || !f.AllowDrop || radios!=3 || selected!=1 || choice!="Full HD") return 1;
+   f.Close(); Console.WriteLine("PASS: independent window, file drop, three mutually exclusive profiles, Full HD default.");
   } return 0;
  }
 }
