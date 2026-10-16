@@ -32,9 +32,8 @@ namespace PPTimizNext {
    var local=TextAt("●  Local",594,34,105,24,10,Color.FromArgb(166,212,196),false);
    tips.SetToolTip(local,"Traitement sur cet ordinateur. Aucun document envoyé vers un serveur."); header.Controls.Add(local); Controls.Add(header);
    var drop=new Panel { Bounds=new Rectangle(24,110,672,102),BackColor=Color.White,BorderStyle=BorderStyle.FixedSingle,AllowDrop=true };
-   var icon=TextAt("▧",17,20,50,56,29,Accent,false); drop.Controls.Add(icon);
-   fileName.SetBounds(78,25,405,28); fileName.Text="Déposez une présentation"; fileName.Font=new Font("Segoe UI",12,FontStyle.Bold); fileName.AutoEllipsis=true;
-   fileInfo.SetBounds(78,58,405,24); fileInfo.ForeColor=Muted; fileInfo.Text=".pptx · .pptm";
+   fileName.SetBounds(22,25,465,28); fileName.Text="Déposez une présentation"; fileName.Font=new Font("Segoe UI",12,FontStyle.Bold); fileName.AutoEllipsis=true;
+   fileInfo.SetBounds(22,58,465,24); fileInfo.ForeColor=Muted; fileInfo.Text=".pptx · .pptm";
    StyleButton(browse,"＋",new Rectangle(552,24,94,50),false); browse.Font=new Font("Segoe UI",21); browse.AccessibleName="Choisir une présentation";
    tips.SetToolTip(browse,"Choisir une présentation PowerPoint. Enregistrez vos modifications dans PowerPoint avant de la sélectionner.");
    tips.SetToolTip(fileName,"Déposez un fichier .pptx ou .pptm ici, ou utilisez le bouton +.");
