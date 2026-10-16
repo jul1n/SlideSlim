@@ -1,87 +1,176 @@
+<div align="center">
+
 # SlideSlim
 
-**Des présentations plus légères, des images à la bonne taille.**
+### Vos idées prennent de la place. Vos fichiers, beaucoup moins.
 
-Application Windows indépendante pour réduire la taille des présentations PowerPoint `.pptx` et `.pptm`, en créant une nouvelle copie. Version actuelle : **2.1**. Le nom interne reste provisoirement PPTimiz Next.
+Compressez vos présentations PowerPoint pour les partager et les projeter plus facilement.<br>
+**Des images dimensionnées pour vos diapositives. Un original toujours conservé.**
 
-Le traitement est entièrement local. PowerPoint n’a pas besoin d’être installé ou ouvert et aucun complément Office n’est chargé.
+**Windows · PowerPoint .pptx / .pptm · Traitement 100 % local · Version 2.1**
 
-## Installation et utilisation
+[Démarrer](#démarrer-en-quelques-minutes) · [Voir les résultats](#un-exemple-concret) · [Choisir sa qualité](#trois-profils-pour-trouver-le-bon-équilibre) · [Comprendre le moteur](#des-pixels-utiles-là-où-il-en-faut)
 
-Avec une archive de distribution : extraire tous les fichiers, puis lancer `Installer.cmd`. Un raccourci **PPTimiz Next** est créé sur le Bureau et dans le menu Démarrer de l’utilisateur.
+</div>
 
-Depuis les sources :
+---
+
+## Une présentation prête à circuler
+
+Les photos s’accumulent, les images restent en haute résolution et une présentation finit par peser des dizaines de mégaoctets. SlideSlim crée une copie plus légère en adaptant les images à leur utilisation réelle dans les diapositives.
+
+**Déposez votre présentation. Choisissez une qualité. Récupérez votre copie optimisée.**
+
+| Pour vous | Ce que fait SlideSlim |
+|---|---|
+| **Des fichiers plus faciles à partager** | Réduit le poids des images et mutualise les contenus identiques. |
+| **Une qualité adaptée à la projection** | Calcule les pixels nécessaires à partir de la place des images sur les diapositives. |
+| **Une présentation qui reste modifiable** | Conserve les textes, formes et graphiques vectoriels dans leur format natif. |
+| **Vos documents restent chez vous** | Traite les fichiers sur votre ordinateur, sans envoi vers un serveur. |
+| **Votre original reste disponible** | Enregistre le résultat dans une nouvelle copie, sans remplacer un fichier existant. |
+| **Une application indépendante** | Fonctionne sans charger de complément et sans ouvrir PowerPoint. |
+
+## Un exemple concret
+
+Sur une présentation utilisée pour les essais :
+
+| Fichier | Taille | Réduction par rapport à l’original |
+|---|---:|---:|
+| Original | **153,6 Mo** | — |
+| Intermédiaire Full HD | **4,60 Mo** | **environ 97 %** |
+| Maximum HD | **2,15 Mo** | **environ 98,6 %** |
+
+**Environ 33 fois plus léger en Full HD, et 71 fois en Maximum HD sur cet exemple.**
+
+Ces mesures portent sur un seul document et ne garantissent pas le même gain sur d’autres fichiers. Une présentation déjà optimisée ou composée surtout de vidéos peut diminuer beaucoup moins. Les profils réduisent volontairement la résolution et la qualité des images.
+
+## Des pixels utiles, là où il en faut
+
+Une petite photo dans un coin de diapositive n’a pas besoin de conserver tous les pixels de l’appareil qui l’a prise.
+
+Sur une diapositive 16:9 projetée en **1920 × 1080**, une image occupant **un quart de la largeur** nécessite environ **480 pixels de large** avant compensation du recadrage. SlideSlim utilise cette place réelle pour calculer sa résolution cible.
+
+Le moteur tient compte des recadrages et des groupes. Si une image sert à plusieurs endroits, il conserve la résolution nécessaire à sa plus grande utilisation. Il n’agrandit jamais une image.
+
+Les profils Full HD et Maximum vont plus loin : ils peuvent convertir les grands PNG opaques en JPEG et stocker une seule fois les images dont le contenu final est identique. Les images avec une véritable transparence restent en PNG.
+
+## Trois profils pour trouver le bon équilibre
+
+| Profil | À choisir pour… | Résolution cible | Qualité JPEG |
+|---|---|---|---:|
+| **Standard** | Une compression à qualité JPEG élevée, en conservant les PNG | 150 pixels par pouce selon la taille affichée | 90 |
+| **Intermédiaire Full HD** | **Le point de départ conseillé pour la projection en 1080p** | Diapositive dans 1920 × 1080 | 82 |
+| **Maximum HD** | Privilégier un fichier compact pour une projection en 720p | Diapositive dans 1280 × 720 | 72 |
+
+La résolution cible concerne la **diapositive entière** : chaque image reçoit les dimensions adaptées à sa place. Un recadrage important peut demander davantage de pixels pour préserver la zone visible.
+
+## Démarrer en quelques minutes
+
+### Depuis les sources
+
+Installez [Git](https://git-scm.com/), puis ouvrez PowerShell :
 
 ```powershell
+git clone https://github.com/jul1n/SlideSlim.git
+cd SlideSlim
 powershell -NoProfile -ExecutionPolicy Bypass -File .\build.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File .\Install-Standalone.ps1
 ```
 
-Windows et .NET Framework 4.8 sont les prérequis recommandés. L’installation est par utilisateur dans `%USERPROFILE%\Applications\PPTimizNext\Standalone-2.1`. Aucun droit administrateur n’est normalement requis.
+**Prérequis : Windows avec .NET Framework 4.8 recommandé.** La compilation utilise le compilateur .NET Framework présent sur le poste, sans paquet NuGet ni téléchargement de dépendances. Microsoft PowerPoint n’est pas requis pour le traitement.
 
-1. Enregistrer les modifications de la présentation dans PowerPoint.
-2. Ouvrir PPTimiz Next et choisir ou déposer un fichier.
-3. Choisir le niveau de compression.
-4. Choisir un nouveau fichier de sortie, puis attendre la synthèse.
+L’installateur crée un raccourci sur le Bureau et dans le menu Démarrer. Le nom affiché dans l’application et les raccourcis est encore **PPTimiz Next** ; SlideSlim est le nouveau nom du projet.
 
-L’application lit le fichier sur disque : les modifications non enregistrées dans PowerPoint ne sont pas incluses. L’installateur désactive uniquement les anciens compléments `PPTimizNext.*` de ce projet.
+### Depuis une archive de distribution
 
-## Niveaux de compression
+Si vous disposez d’une archive compilée, extrayez tous ses fichiers puis lancez `Installer.cmd`.
 
-| Profil | Résolution cible | Qualité JPEG |
-|---|---|---:|
-| Standard | 150 pixels par pouce selon la taille affichée | 90 |
-| Intermédiaire Full HD | Diapositive projetée dans 1920 × 1080 | 82 |
-| Maximum HD | Diapositive projetée dans 1280 × 720 | 72 |
+L’installation se fait pour l’utilisateur courant dans `%USERPROFILE%\Applications\PPTimizNext\Standalone-2.1`, normalement sans droit administrateur. Elle désactive uniquement les anciens compléments `PPTimizNext.*` de ce projet.
 
-La résolution est calculée **selon la place de chaque image dans la diapositive**, en tenant compte du recadrage et des groupes. Une image occupant un quart de la largeur d’une diapositive 16:9 projetée en 1080p nécessite environ 480 pixels de large avant compensation du recadrage. Si une image est réutilisée, sa plus grande utilisation détermine la résolution conservée. Les images ne sont jamais agrandies.
+### Votre première compression
 
-Les profils Intermédiaire et Maximum convertissent les PNG opaques de plus de 64 Kio en JPEG lorsque cela réduit leur taille et mutualisent les images dont le contenu final est identique. Les véritables transparences restent en PNG. Standard conserve les PNG. Sans géométrie exploitable, une limite de 2560, 1920 ou 1280 pixels est utilisée selon le profil.
+1. **Enregistrez** vos dernières modifications dans PowerPoint.
+2. **Ouvrez l’application** et choisissez ou déposez un fichier `.pptx` ou `.pptm`.
+3. **Sélectionnez un profil** — commencez par Intermédiaire Full HD.
+4. **Choisissez un nouveau fichier de sortie.** La synthèse finale indique le poids obtenu et les optimisations réalisées.
 
-Le moteur supprime aussi les dispositions inutilisées, tout en conservant au moins une disposition par masque. Les textes, formes et graphiques vectoriels ne sont pas rasterisés. Les vidéos, objets incorporés et macros sont conservés sans recompression ; les macros ne sont pas exécutées par le moteur.
+L’application lit le fichier enregistré sur disque. Les modifications encore non sauvegardées dans PowerPoint ne sont pas incluses.
 
-## Protection des fichiers et limites
+## Votre original reste votre référence
 
-- L’original n’est jamais remplacé ni supprimé ; une destination existante est refusée.
-- La copie est vérifiée avant publication ; sans gain de taille, aucune copie n’est publiée.
-- Les signatures numériques Open XML sont refusées afin de ne pas les invalider.
-- Les anciens `.ppt`, les fichiers chiffrés, macOS et PowerPoint Web ne sont pas pris en charge.
-- Les images multitrames ou avec orientation EXIF non normale sont conservées. Les erreurs de décodage sont signalées dans la synthèse.
-- Le redimensionnement et le JPEG entraînent une perte de qualité. Vérifier visuellement une présentation complexe avant diffusion.
+SlideSlim produit une copie et refuse de remplacer un fichier existant. Le résultat est contrôlé avant publication ; s’il n’est pas plus petit, aucune copie supplémentaire n’est créée.
 
-Les contrôles de structure et de relations ne constituent pas une validation exhaustive du schéma Open XML. Aucun taux de réduction de taille n’est garanti. Les exécutables ne sont pas signés par un certificat d’éditeur.
+- **Textes, formes et graphiques vectoriels** : conservés dans leur format natif, sans conversion des diapositives en images.
+- **Vidéos et objets incorporés** : conservés sans recompression.
+- **Macros des fichiers `.pptm`** : conservées sans être exécutées par le moteur.
+- **Transparences** : maintenues en PNG.
+- **Dispositions inutilisées** : nettoyées, avec au moins une disposition conservée par masque.
 
-## Développement
+## Questions fréquentes
 
-Le code utilise C#, Windows Forms, System.Drawing et les API ZIP/XML de .NET Framework. Aucun paquet NuGet ni accès réseau n’est nécessaire à la compilation. Le compilateur est celui de .NET Framework sous Windows.
+**Faut-il ouvrir PowerPoint ?**
+
+Non. SlideSlim travaille directement sur le fichier enregistré. Il n’ajoute pas de bouton au ruban.
+
+**Mes présentations quittent-elles mon ordinateur ?**
+
+Non. Le moteur traite les documents localement, sans service externe.
+
+**La qualité reste-t-elle identique ?**
+
+Le redimensionnement et la compression JPEG entraînent une perte de qualité des images. Les textes et formes restent natifs. Choisissez le profil selon l’usage et vérifiez visuellement la copie avant diffusion.
+
+**Pourquoi le gain est-il parfois faible ?**
+
+Le fichier peut contenir des images déjà optimisées ou des médias que SlideSlim ne recompresse pas, comme les vidéos. Le gain dépend du contenu.
+
+**Quels fichiers sont pris en charge ?**
+
+Les `.pptx` et `.pptm` non chiffrés. Les anciens `.ppt` doivent être convertis au préalable. Les présentations avec une signature numérique Open XML sont refusées pour ne pas l’invalider. macOS et PowerPoint Web ne sont pas pris en charge.
+
+**Que deviennent les images particulières ?**
+
+Les images multitrames et celles avec une orientation EXIF non normale sont conservées. Les erreurs de décodage sont signalées dans la synthèse. Sans géométrie exploitable, une limite globale de 2560, 1920 ou 1280 pixels est utilisée selon le profil. La conversion PNG/JPEG concerne les PNG opaques de plus de 64 Kio et n’est retenue que si elle réduit leur taille.
+
+## Pour les développeurs
+
+**C# · Windows Forms · .NET Framework · ZIP / XML · System.Drawing**
 
 ```powershell
-# Compiler
+# Compiler l’application
 powershell -NoProfile -ExecutionPolicy Bypass -File .\build.ps1
 
-# Exécuter les tests synthétiques
+# Exécuter les 35 tests synthétiques du moteur
 powershell -NoProfile -ExecutionPolicy Bypass -File .\test.ps1
 
-# Construire l’archive distribuable
+# Construire une archive de distribution
 powershell -NoProfile -ExecutionPolicy Bypass -File .\package.ps1
 ```
 
-Les **35 tests automatisés** couvrent notamment la préservation de l’original, les macros, vidéos, vecteurs, transparences, recadrages, résolution selon la taille affichée, conversions PNG/JPEG, images identiques, collisions de noms, XML invalide et nettoyage des dispositions. Ils créent leurs propres données synthétiques. Aucun document personnel n’est inclus dans ce dépôt.
+Les tests couvrent la préservation de l’original, les macros, vidéos, vecteurs, transparences, recadrages, résolutions calculées, conversions PNG/JPEG, images identiques, collisions de noms, XML invalide et nettoyage des dispositions. Ils génèrent leurs propres données : aucun document personnel n’est inclus dans le dépôt.
+
+<details>
+<summary><strong>Explorer le code et les limites techniques</strong></summary>
 
 | Fichier | Rôle |
 |---|---|
-| `src/Launcher.cs` | Fenêtre indépendante, dépôt de fichiers et traitement en arrière-plan |
+| `src/Launcher.cs` | Interface, dépôt de fichiers et traitement en arrière-plan |
 | `src/Program.cs` | Point d’entrée |
-| `src/Engine.cs` | Compression, vérification et publication |
+| `src/Engine.cs` | Compression, vérification et publication de la copie |
 | `src/ImageGeometry.cs` | Dimensions, recadrages et relations Open XML |
 | `src/LayoutCleaner.cs` | Nettoyage des dispositions inutilisées |
-| `src/AddIn.cs` | Dialogues communs et ancien prototype COM conservé pour compatibilité du code |
-| `Install-Standalone.ps1` | Installation par utilisateur et raccourcis |
-| `tests/Tests.cs`, `tests/SmartTests.cs` | Tests du moteur |
+| `src/AddIn.cs` | Dialogues communs et ancien prototype COM conservé dans le code |
+| `Install-Standalone.ps1` | Installation et raccourcis |
+| `tests/Tests.cs`, `tests/SmartTests.cs` | Tests synthétiques du moteur |
 
-## Historique de l’intégration
+Les contrôles XML et de relations ne constituent pas une validation exhaustive du schéma Open XML ou de tous les effets visuels PowerPoint. Les exécutables ne sont pas signés par un certificat d’éditeur.
 
-Une intégration COM au ruban a été expérimentée puis abandonnée à cause de chargements intermittents sur le poste de test. La version distribuée est l’application indépendante. Aucun enregistrement COM n’est nécessaire pour l’utiliser.
+Une intégration COM a été expérimentée puis abandonnée à cause de chargements intermittents. L’application actuelle est indépendante et ne nécessite aucun enregistrement COM.
 
-Le projet s’appuie sur les formats Open XML ; aucun binaire ni code décompilé du programme original n’est distribué dans ce dépôt.
+Aucun binaire ni code décompilé du programme original n’est distribué dans ce dépôt.
 
+</details>
+
+---
+
+**Un problème ou une idée ?** [Ouvrez une issue](https://github.com/jul1n/SlideSlim/issues) en précisant le profil utilisé, les tailles avant/après et le message affiché. Évitez de joindre une présentation confidentielle.
