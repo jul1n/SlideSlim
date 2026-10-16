@@ -1,0 +1,26 @@
+# Build products, generated fixtures and personal documents
+/dist/
+/releases/
+/tests/*
+!/tests/Tests.cs
+!/tests/SmartTests.cs
+!/tests/LauncherSmoke.cs
+*.pptx
+*.pptm
+*.ppt
+*.log
+*.snk
+*.zip
+.vs/
+*.user
+# Local legacy installation and diagnostic scripts
+/Install.ps1
+/Uninstall.ps1
+/Install-Managed-legacy.ps1
+/Uninstall-legacy.ps1
+/Install-OutsidePackage.ps1
+/Desinstaller.cmd
+/build-native.ps1
+/src/*.c
+/src/*.h
+/src/*.def
